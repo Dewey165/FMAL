@@ -1,48 +1,65 @@
 
 public class Parser {
-	Lexer var1; 
-	Token var2;
+	Lexer lex; 
+	Token token;
 	
-	public Parser(Lexer myLexer) {
+	public void parse() {
 		// TODO Auto-generated constructor stub
+		
+		/*
+		token = lexer()
+		Statements();
+		*/
 	}
-
-	public void parse()
-	{
+	
+	private void Statements() {
+		/*
+ 		if (token == END) {
+ 		break;
+ 		}
+ 		else {
+ 			Statement();
+ 			if (token == SEMICOL) {
+ 			}
+ 			Statements();
+ 		}
+		*/
+	}
+	
+	private void Statement() {
+		/*
+ 		if (token == ID) {
+ 			token = lexer();
+ 			if (token == ASSIGN) {
+ 				print =
+ 			}
+ 			
+ 			
+		*/
+	}
+	
+	private void Expr() {
+		/*
+ 		
+		*/
+	}
+	
+	private void Term() {
+		/*
+ 		
+		*/
+	}
+	
+	private void Factor() {
+		/*
+ 		
+		*/
+	}
+	
+	private void Error() {
+		/*
+ 		stdoutwrite "Syntax error!";
+		*/
 		
 	}
-}
-
-
-enum TokenCode { LPAREN, RPAREN, INT, PLUS, MINUS};
-TokenCode nextToken;
-void parser() {
-	nextToken = lex();
-	P();
-}
-void P() {
-	if (nextToken == LPAREN) {
-		nextToken = lex();
-		Expr();
-		if (nextToken == RPAREN)
-			nextToken = lex();
-			else error();
-		}
-		else {
-			if (nextToken == int)
-			nextToken = lex();
-			else error();
-		}
-	}
-	void Expr() {
-		Oper();
-		P();
-		P();
-	}
-	void Oper() {
-	if (nextToken == PLUS)
-	nextToken = lex();
-	else if (nextToken == MINUS)
-	nextToken = lex();
-	else error();
 }
