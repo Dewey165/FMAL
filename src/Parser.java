@@ -5,11 +5,10 @@ public class Parser {
 	
 	public void parse() {
 		// TODO Auto-generated constructor stub
-		
 		/*
-		token = lexer()
+		token = lex.nextToken();
 		Statements();
-		*/
+		/*
 	}
 	
 	private void Statements() {
@@ -18,10 +17,12 @@ public class Parser {
  		break;
  		}
  		else {
+ 			token = lex.nextToken();
  			Statement();
  			if (token == SEMICOL) {
+ 				token = lex.nextToken();
+ 				Statements();
  			}
- 			Statements();
  		}
 		*/
 	}
@@ -29,12 +30,17 @@ public class Parser {
 	private void Statement() {
 		/*
  		if (token == ID) {
- 			token = lexer();
+ 			token = lex.nextToken();
  			if (token == ASSIGN) {
- 				print =
+ 				token = lex.nextToken();
+ 				Expr();
  			}
+ 		}
+ 		else if (token == PRINT) {
+ 			token = lex.nextToken();
+ 			if (token == ASSIGN) {
  			
- 			
+ 		}
 		*/
 	}
 	
@@ -58,7 +64,7 @@ public class Parser {
 	
 	private void Error() {
 		/*
- 		stdoutwrite "Syntax error!";
+ 		print "Syntax error!";
 		*/
 		
 	}
