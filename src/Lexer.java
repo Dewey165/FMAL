@@ -1,11 +1,10 @@
 
 public class Lexer {
-	int lex()
+	
+	public void nextToken()
 	{
-		getChar();
-		switch( charClass )
-		{
-			addChar();getChar
-		}
+		// scan stdin looking for patterns that match one of 
+		// the tokens 1). 
+		
 	}
 }
