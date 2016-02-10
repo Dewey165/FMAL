@@ -1,6 +1,6 @@
 public class Compiler {
 	
-	public void main() {
+	public static void main(String[] args) {
 		System.out.println("Hi!");
 		Lexer myLexer = new Lexer();
 		Parser myParser = new Parser(myLexer);
