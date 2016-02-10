@@ -1,110 +1,101 @@
 
 public class Parser {
 	Lexer lex; 
-	Token token;
+	Token.TokenCode token;
+	
+	Parser(Lexer lex) {
+		this.lex = lex;
+	}
 	
 	public void parse() {
 		// TODO Auto-generated constructor stub
 		
 		token = lex.nextToken();
-		Statements();
+		statements();
+		
 		
 	}
 	
-	private void Statements() {
-		/*
- 		if (token == END) {
- 		break;
+	private void statements() {
+ 		if (token == Token.TokenCode.END) {
  		}
  		else {
- 			Statement();
- 			if (token == SEMICOL) {
+ 			statement();
+ 			if (token == Token.TokenCode.SEMICOL) {
  				token = lex.nextToken();
- 				Statements();
+ 				statements();
  			}
  			else {
- 				Error();
+ 				error();
  			}
  		}
-		*/
 	}
 	
-	private void Statement() {
-		/*
- 		if (token == ID) {
+	private void statement() {
+ 		if (token == Token.TokenCode.ID) {
  			token = lex.nextToken();
- 			if (token == ASSIGN) {
+ 			if (token == Token.TokenCode.ASSIGN) {
  				token = lex.nextToken();
- 				Expr();
+ 				expr();
  			}
  			else {
- 				Error();
+ 				error();
  			}
  		}
- 		else if (token == PRINT) {
+ 		else if (token == Token.TokenCode.PRINT) {
  			token = lex.nextToken();
- 			if (token == ID) {
+ 			if (token == Token.TokenCode.ID) {
  				token = lex.nextToken();
  			}
  			else {
- 				Error();
+ 				error();
  			}
  		}
  		else {
- 			Error();
+ 			error();
  		}
-		*/
 	}
 	
-	private void Expr() {
-		/*
-		Term();
-		if (token == ADD || token == SUB) {
+	private void expr() {
+		term();
+		if (token == Token.TokenCode.ADD || token == Token.TokenCode.SUB) {
 			token = lex.nextToken();
-			Expr();
+			expr();
 		}
-		*/
 	}
 	
-	private void Term() {
-		/*
- 		Factor();
-		if (token == MULT) {
+	private void term() {
+ 		factor();
+		if (token == Token.TokenCode.MULT) {
 			token = lex.nextToken();
-			Term();
+			term();
 		}
-		*/
 	}
 	
-	private void Factor() {
-		/*
- 		if (token == INT) {
+	private void factor() {
+ 		if (token == Token.TokenCode.INT) {
  			token = lex.nextToken();
  		}
- 		else if (token == ID) {
+ 		else if (token == Token.TokenCode.ID) {
  			token = lex.nextToken();
  		}
- 		else if (token == LPAREN) {
+ 		else if (token == Token.TokenCode.LPAREN) {
  			token = lex.nextToken();
- 			Expr();
+ 			expr();
  			token = lex.nextToken();
- 			if (token == LPAREN) {
+ 			if (token == Token.TokenCode.LPAREN) {
  				token = lex.nextToken();
  			}
  			else {
- 				Error();
+ 				error();
  			}
  		}
  		else {
- 			Error();
+ 			error();
  		}
-		*/
 	}
 	
-	private void Error() {
-		/*
- 		print "Syntax error!";
-		*/
-		
+	private void error() {
+		System.out.println("Syntax error!");
 	}
 }
