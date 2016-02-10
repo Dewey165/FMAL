@@ -29,6 +29,7 @@ public class Parser {
 	
 	private void statement() {
  		if (token.tCode == Token.TokenCode.ID) {
+ 			System.out.println("PUSH " + token.lexeme);
  			token = lex.nextToken();
  			if (token.tCode == Token.TokenCode.ASSIGN) {
  				token = lex.nextToken();
@@ -44,6 +45,7 @@ public class Parser {
  			System.out.println("PRINT");
  			if (token.tCode == Token.TokenCode.ID) {
  				token = lex.nextToken();
+ 				System.out.println(lex);
  			}
  			else {
  				error();
@@ -79,18 +81,18 @@ public class Parser {
 	
 	private void factor() {
  		if (token.tCode == Token.TokenCode.INT) {
+ 			System.out.println("PUSH " + token.lexeme);
  			token = lex.nextToken();
- 			System.out.println("INT");
  		}
  		else if (token.tCode == Token.TokenCode.ID) {
+ 			System.out.println("PUSH " + token.lexeme);
  			token = lex.nextToken();
- 			System.out.println("ID");
  		}
  		else if (token.tCode == Token.TokenCode.LPAREN) {
  			token = lex.nextToken();
  			expr();
  			token = lex.nextToken();
- 			if (token.tCode == Token.TokenCode.LPAREN) {
+ 			if (token.tCode == Token.TokenCode.RPAREN) {
  				token = lex.nextToken();
  			}
  			else {
