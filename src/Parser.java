@@ -42,10 +42,10 @@ public class Parser {
  		}
  		else if (token.tCode == Token.TokenCode.PRINT) {
  			token = lex.nextToken();
- 			System.out.println("PRINT");
  			if (token.tCode == Token.TokenCode.ID) {
  				token = lex.nextToken();
- 				System.out.println(lex);
+ 				System.out.println("PUSH " + token.lexeme);
+ 				System.out.println("PRINT");
  			}
  			else {
  				error();
