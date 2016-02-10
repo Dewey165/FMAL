@@ -9,7 +9,7 @@ public class Parser {
 	
 	public void parse() {
 		// TODO Auto-generated constructor stub
-		
+		System.out.println("Hi!");
 		token = lex.nextToken();
 		statements();
 		
@@ -18,6 +18,7 @@ public class Parser {
 	
 	private void statements() {
  		if (token == Token.TokenCode.END) {
+ 			System.out.println("PRINT");
  		}
  		else {
  			statement();
@@ -37,6 +38,7 @@ public class Parser {
  			if (token == Token.TokenCode.ASSIGN) {
  				token = lex.nextToken();
  				expr();
+ 				System.out.println("ASSIGN");
  			}
  			else {
  				error();
@@ -58,9 +60,15 @@ public class Parser {
 	
 	private void expr() {
 		term();
-		if (token == Token.TokenCode.ADD || token == Token.TokenCode.SUB) {
+		if (token == Token.TokenCode.ADD) {
 			token = lex.nextToken();
 			expr();
+			System.out.println("ADD");
+		}
+		else if (token == Token.TokenCode.SUB) {
+			token = lex.nextToken();
+			expr();
+			System.out.println("SUB");
 		}
 	}
 	
@@ -69,15 +77,18 @@ public class Parser {
 		if (token == Token.TokenCode.MULT) {
 			token = lex.nextToken();
 			term();
+			System.out.println("MULT");
 		}
 	}
 	
 	private void factor() {
  		if (token == Token.TokenCode.INT) {
  			token = lex.nextToken();
+ 			System.out.println("INT");
  		}
  		else if (token == Token.TokenCode.ID) {
  			token = lex.nextToken();
+ 			System.out.println("ID");
  		}
  		else if (token == Token.TokenCode.LPAREN) {
  			token = lex.nextToken();
