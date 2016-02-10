@@ -4,11 +4,29 @@ public class Lexer {
 	
 	Scanner scanner = new Scanner (System.in);
 	
+	boolean semicol = false;
 		
 	//String?Token?
 	public Token nextToken()
 	{
-		String lexeme = scanner.next();
+		String lexeme;
+		if(semicol)
+		{
+			lexeme = ";";
+			semicol = false;
+		}
+		else 
+		{
+			lexeme = scanner.next();
+			char[] temp = lexeme.toCharArray();
+			if( temp[lexeme.length()-1] == ';')
+			{
+				semicol = true;
+				int length = lexeme.length() - 1;
+				lexeme = lexeme.substring(0,length);
+			}
+		}
+		
 		Token tokenCode = new Token(lexeme);
 		
 		if(lexeme == "print")				{tokenCode.tCode = Token.TokenCode.PRINT;}
@@ -22,8 +40,8 @@ public class Lexer {
 		else if(lexeme == "*")				{tokenCode.tCode =  Token.TokenCode.MULT;}
 		else if(lexeme == "(")				{tokenCode.tCode =  Token.TokenCode.LPAREN;}
 		else if(lexeme == ")")				{tokenCode.tCode =  Token.TokenCode.RPAREN;}
-		
 		else 								{tokenCode.tCode =  tokenCode.tCode.ERROR;}
+		
 		return tokenCode;
 	}
 }
