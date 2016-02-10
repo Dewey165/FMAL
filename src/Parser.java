@@ -71,7 +71,7 @@ public class Parser {
 	}
 	
 	private void term() {
- 		factor();
+		factor();
 		if (token.tCode == Token.TokenCode.MULT) {
 			token = lex.nextToken();
 			term();
@@ -106,5 +106,6 @@ public class Parser {
 	
 	private void error() {
 		System.out.println("Syntax error!");
+		System.exit(0);
 	}
 }
