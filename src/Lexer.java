@@ -1,25 +1,29 @@
 import java.util.Scanner;
 
 public class Lexer {
+	
 	Scanner scanner = new Scanner (System.in);
-	String lexeme = scanner.next();
 	
-	Token tokenCode = new Token(lexeme);
-	
+		
 	//String?Token?
-	public Token.TokenCode nextToken()
+	public Token nextToken()
 	{
-		if     (lexeme.matches("[A-Za-z]+")){return tokenCode.tCode.ID;}
-		else if(lexeme.matches("[0-9]+"))	{return tokenCode.tCode.INT;}
-		else if(lexeme == "=")				{return tokenCode.tCode.ASSIGN;}
-		else if(lexeme == ";")				{return tokenCode.tCode.SEMICOL;}
-		else if(lexeme == "+")				{return tokenCode.tCode.ADD;}
-		else if(lexeme == "-")				{return tokenCode.tCode.SUB;}
-		else if(lexeme == "*")				{return tokenCode.tCode.MULT;}
-		else if(lexeme == "(")				{return tokenCode.tCode.LPAREN;}
-		else if(lexeme == ")")				{return tokenCode.tCode.RPAREN;}
-		else if(lexeme == "print")			{return tokenCode.tCode.PRINT;}
-		else if(lexeme == "end")			{return tokenCode.tCode.END;}
-		else 								{return tokenCode.tCode.ERROR;}
+		String lexeme = scanner.next();
+		Token tokenCode = new Token(lexeme);
+		
+		if(lexeme == "print")				{tokenCode.tCode = Token.TokenCode.PRINT;}
+		else if(lexeme == "end")			{tokenCode.tCode =  Token.TokenCode.END;}
+		else if(lexeme.matches("[A-Za-z]+")){tokenCode.tCode =  Token.TokenCode.ID;}
+		else if(lexeme.matches("[0-9]+"))	{tokenCode.tCode =  Token.TokenCode.INT;}
+		else if(lexeme == "=")				{tokenCode.tCode =  Token.TokenCode.ASSIGN;}
+		else if(lexeme == ";")				{tokenCode.tCode =  Token.TokenCode.SEMICOL;}
+		else if(lexeme == "+")				{tokenCode.tCode =  Token.TokenCode.ADD;}
+		else if(lexeme == "-")				{tokenCode.tCode =  Token.TokenCode.SUB;}
+		else if(lexeme == "*")				{tokenCode.tCode =  Token.TokenCode.MULT;}
+		else if(lexeme == "(")				{tokenCode.tCode =  Token.TokenCode.LPAREN;}
+		else if(lexeme == ")")				{tokenCode.tCode =  Token.TokenCode.RPAREN;}
+		
+		else 								{tokenCode.tCode =  tokenCode.tCode.ERROR;}
+		return tokenCode;
 	}
 }

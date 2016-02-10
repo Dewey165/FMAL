@@ -1,7 +1,7 @@
 
 public class Parser {
 	Lexer lex; 
-	Token.TokenCode token;
+	Token token;
 	
 	Parser(Lexer lex) {
 		this.lex = lex;
@@ -9,20 +9,19 @@ public class Parser {
 	
 	public void parse() {
 		// TODO Auto-generated constructor stub
-		System.out.println("Hi!");
+		//System.out.println("Hi!");
 		token = lex.nextToken();
 		statements();
-		
-		
 	}
 	
 	private void statements() {
- 		if (token == Token.TokenCode.END) {
- 			System.out.println("PRINT");
+ 		if (token.tCode == Token.TokenCode.END) {
+ 			//System.out.println("PRINT");
+ 			//End á að hætta í forritinu en ekki print...
  		}
  		else {
  			statement();
- 			if (token == Token.TokenCode.SEMICOL) {
+ 			if (token.tCode == Token.TokenCode.SEMICOL) {
  				token = lex.nextToken();
  				statements();
  			}
@@ -33,9 +32,9 @@ public class Parser {
 	}
 	
 	private void statement() {
- 		if (token == Token.TokenCode.ID) {
+ 		if (token.tCode == Token.TokenCode.ID) {
  			token = lex.nextToken();
- 			if (token == Token.TokenCode.ASSIGN) {
+ 			if (token.tCode == Token.TokenCode.ASSIGN) {
  				token = lex.nextToken();
  				expr();
  				System.out.println("ASSIGN");
@@ -44,9 +43,9 @@ public class Parser {
  				error();
  			}
  		}
- 		else if (token == Token.TokenCode.PRINT) {
+ 		else if (token.tCode == Token.TokenCode.PRINT) {
  			token = lex.nextToken();
- 			if (token == Token.TokenCode.ID) {
+ 			if (token.tCode == Token.TokenCode.ID) {
  				token = lex.nextToken();
  			}
  			else {
@@ -60,12 +59,12 @@ public class Parser {
 	
 	private void expr() {
 		term();
-		if (token == Token.TokenCode.ADD) {
+		if (token.tCode == Token.TokenCode.ADD) {
 			token = lex.nextToken();
 			expr();
 			System.out.println("ADD");
 		}
-		else if (token == Token.TokenCode.SUB) {
+		else if (token.tCode == Token.TokenCode.SUB) {
 			token = lex.nextToken();
 			expr();
 			System.out.println("SUB");
@@ -74,7 +73,7 @@ public class Parser {
 	
 	private void term() {
  		factor();
-		if (token == Token.TokenCode.MULT) {
+		if (token.tCode == Token.TokenCode.MULT) {
 			token = lex.nextToken();
 			term();
 			System.out.println("MULT");
@@ -82,19 +81,19 @@ public class Parser {
 	}
 	
 	private void factor() {
- 		if (token == Token.TokenCode.INT) {
+ 		if (token.tCode == Token.TokenCode.INT) {
  			token = lex.nextToken();
  			System.out.println("INT");
  		}
- 		else if (token == Token.TokenCode.ID) {
+ 		else if (token.tCode == Token.TokenCode.ID) {
  			token = lex.nextToken();
  			System.out.println("ID");
  		}
- 		else if (token == Token.TokenCode.LPAREN) {
+ 		else if (token.tCode == Token.TokenCode.LPAREN) {
  			token = lex.nextToken();
  			expr();
  			token = lex.nextToken();
- 			if (token == Token.TokenCode.LPAREN) {
+ 			if (token.tCode == Token.TokenCode.LPAREN) {
  				token = lex.nextToken();
  			}
  			else {
