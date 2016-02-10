@@ -3,22 +3,28 @@ public class Token {
 	String lexeme;
 	public TokenCode tCode;
 	
-	enum TokenCode { ID, ASSIGN, SEMICOL, INT, ADD, MINUS,
+	enum TokenCode { ID, ASSIGN, SEMICOL, INT, ADD, SUB,
 		MULT, LPAREN, RPAREN, PRINT, END, ERROR }
-	
-	public TokenCode tCode (String lexeme)
+		
+	public static TokenCode deCode(String lexeme)
 	{
-		if (lexeme.matches([A-Za-z]+)){return tCode[0];}
-		else if(lexeme == '='){return tCode[1];}
-		else if(lexeme == ';'){return tCode[2];}
-		else if (lexeme.matches([0-9]+)){return tCode[3];}
-		else if(lexeme == '+'){return tCode[4];}
-		else if(lexeme == '-'){return tCode[5];}
-		else if(lexeme == '*'){return tCode[6];}
-		else if(lexeme == '('){return tCode[7];}
-		else if(lexeme == ')'){return tCode[8];}
-		else if(lexeme == 'print'){return tCode[9];}
-		else if(lexeme == 'end'){return tCode[10];}
-		else {return tCode[11];}
+	    this.lexeme = lexeme;
+	    return getCode(lexeme);
+	}
+	
+	public TokenCode getCode (String lexeme)
+	{
+		if (lexeme.matches("[A-Za-z]+")){return TokenCode.ID;}
+		else if(lexeme == "="){return TokenCode.ASSIGN;}
+		else if(lexeme == ";"){return TokenCode.SEMICOL;}
+		else if (lexeme.matches("[0-9]+")){return TokenCode.INT;}
+		else if(lexeme == "+"){return TokenCode.ADD;}
+		else if(lexeme == "-"){return TokenCode.SUB;}
+		else if(lexeme == "*"){return TokenCode.MULT;}
+		else if(lexeme == "("){return TokenCode.LPAREN;}
+		else if(lexeme == ")"){return TokenCode.RPAREN;}
+		else if(lexeme == "print"){return TokenCode.PRINT;}
+		else if(lexeme == "end"){return TokenCode.END;}
+		else {return TokenCode.ERROR;}
 	}
 }
