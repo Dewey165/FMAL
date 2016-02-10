@@ -9,13 +9,19 @@ public class Interpreter {
 		String operand, variable;
 		int value;
 		Stack<String> stack = new Stack<String>();
+		Map<String, Integer> map = new HashMap<String, Integer>();
 		scanner = new Scanner(System.in);
 		
 		while (scanner.hasNext()) {
 			String command = scanner.next();
 			if (command.matches("PUSH")) {
 				operand = scanner.next();
-				stack.push(operand);
+				if (map.containsKey(operand)) {
+					stack.push(String.valueOf(map.get(operand)));
+				}
+				else {
+					stack.push(operand);
+				}
 			}
 			else if (command.matches("ADD")) {
 				value = 0;
@@ -38,8 +44,7 @@ public class Interpreter {
 			else if (command.matches("ASSIGN")) {
 				value = Integer.parseInt(stack.pop());
 				variable = (stack.pop());
-				operand = (variable + ' ' + String.valueOf(value));
-				stack.push(operand);
+				map.put(variable, value);
 			}
 			else if (command.matches("PRINT")) {
 				System.out.println(stack.pop());
