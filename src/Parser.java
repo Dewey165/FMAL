@@ -8,16 +8,12 @@ public class Parser {
 	}
 	
 	public void parse() {
-		// TODO Auto-generated constructor stub
-		//System.out.println("Hi!");
 		token = lex.nextToken();
 		statements();
 	}
 	
 	private void statements() {
  		if (token.tCode == Token.TokenCode.END) {
- 			//System.out.println("PRINT");
- 			//End á að hætta í forritinu en ekki print...
  		}
  		else {
  			statement();
@@ -45,6 +41,7 @@ public class Parser {
  		}
  		else if (token.tCode == Token.TokenCode.PRINT) {
  			token = lex.nextToken();
+ 			System.out.println("PRINT");
  			if (token.tCode == Token.TokenCode.ID) {
  				token = lex.nextToken();
  			}
