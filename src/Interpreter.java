@@ -49,6 +49,9 @@ public class Interpreter {
 			else if (command.matches("PRINT")) {
 				System.out.println(stack.pop());
 			}
+			else {
+				System.out.println("Error for operator: " + command);
+			}
 		}
 	}
 }
