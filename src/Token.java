@@ -8,6 +8,9 @@ public class Token {
 	
 	public Token(String lexeme) {
 		this.lexeme = lexeme;
+	}
+	public Token(String lexeme, TokenCode tCode) {
+		this.lexeme = lexeme;
 		this.tCode = tCode;
 	}
 }

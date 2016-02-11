@@ -5,6 +5,7 @@ public class Lexer {
 	@SuppressWarnings("deprecation")
 	StreamTokenizer st = new StreamTokenizer(System.in);
 	int minusNumber = 0;
+	String minusID = "";
 	/*
 	Scanner scanner = new Scanner (System.in);
 	static boolean readIntoQueue = true;
@@ -19,12 +20,26 @@ public class Lexer {
 			if (minusNumber != 0)
 			{
 				lexeme = "" + minusNumber; 
-				tokenCode = new Token(lexeme);
-				tokenCode.tCode =  Token.TokenCode.INT;
+				tokenCode = new Token(lexeme, Token.TokenCode.INT);
 				minusNumber = 0;
 				return tokenCode;
 			}
-			
+			else if (minusID != "")
+			{
+				char firstLetter;
+				firstLetter = minusID.toCharArray()[0];
+				if(firstLetter == '-')
+				{
+					tokenCode = new Token("-", Token.TokenCode.SUB);
+					minusID = minusID.substring(1);
+					return tokenCode;
+				}
+				
+				tokenCode = new Token(minusID);
+				tokenCode.tCode =  Token.TokenCode.ID;
+				minusID = "";
+				return tokenCode;
+			}
 			tokenType = st.nextToken();
 			lexeme = st.toString();
 			
@@ -42,7 +57,7 @@ public class Lexer {
 						minusNumber = temp1 * (-1);
 						tokenCode = new Token("-");
 						tokenCode.tCode =  Token.TokenCode.SUB;
-						break;
+						return tokenCode;
 					}
 					lexeme = "" + temp1; 
 					tokenCode = new Token(lexeme);
@@ -50,6 +65,28 @@ public class Lexer {
 					break;
 				case StreamTokenizer.TT_WORD:
 					lexeme = st.sval;
+					if(lexeme.contains("-"))
+					{
+						String firstLetter = "";
+						firstLetter = lexeme.substring(0, 1);
+						if(firstLetter == "-")
+						{
+							tokenCode = new Token("-");
+							tokenCode.tCode =  Token.TokenCode.SUB;
+							minusID = minusID.substring(1);
+							return tokenCode;
+						}
+						else
+						{
+							String[] temp2 = lexeme.split("-");
+							lexeme = temp2[0];
+							minusID = "-" + temp2[1];
+							tokenCode = new Token(lexeme);
+							tokenCode.tCode =  Token.TokenCode.ID;
+							return tokenCode;
+						}
+					
+					}
 					tokenCode = new Token(lexeme);
 					//System.out.println("identifier " + st.sval);
 					if(lexeme.matches("print"))
