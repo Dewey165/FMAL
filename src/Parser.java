@@ -43,9 +43,9 @@ public class Parser {
  		else if (token.tCode == Token.TokenCode.PRINT) {
  			token = lex.nextToken();
  			if (token.tCode == Token.TokenCode.ID) {
- 				token = lex.nextToken();
  				System.out.println("PUSH " + token.lexeme);
  				System.out.println("PRINT");
+ 				token = lex.nextToken();
  			}
  			else {
  				error();
@@ -91,7 +91,6 @@ public class Parser {
  		else if (token.tCode == Token.TokenCode.LPAREN) {
  			token = lex.nextToken();
  			expr();
- 			token = lex.nextToken();
  			if (token.tCode == Token.TokenCode.RPAREN) {
  				token = lex.nextToken();
  			}
