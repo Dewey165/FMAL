@@ -1,10 +1,10 @@
 import java.io.IOException;
 import java.io.StreamTokenizer;
-import java.util.*;
 public class Lexer {
 	
+	@SuppressWarnings("deprecation")
 	StreamTokenizer st = new StreamTokenizer(System.in);
-	
+	int minusNumber = 0;
 	/*
 	Scanner scanner = new Scanner (System.in);
 	static boolean readIntoQueue = true;
@@ -16,6 +16,15 @@ public class Lexer {
 		Token tokenCode = null;
 		int tokenType;
 		try {
+			if (minusNumber != 0)
+			{
+				lexeme = "" + minusNumber; 
+				tokenCode = new Token(lexeme);
+				tokenCode.tCode =  Token.TokenCode.INT;
+				minusNumber = 0;
+				return tokenCode;
+			}
+			
 			tokenType = st.nextToken();
 			lexeme = st.toString();
 			
@@ -28,6 +37,13 @@ public class Lexer {
 				case StreamTokenizer.TT_NUMBER:
 					double temp = st.nval;
 					int temp1 = (int)Math.round(temp);
+					if(temp1 < 0)
+					{
+						minusNumber = temp1 * (-1);
+						tokenCode = new Token("-");
+						tokenCode.tCode =  Token.TokenCode.SUB;
+						break;
+					}
 					lexeme = "" + temp1; 
 					tokenCode = new Token(lexeme);
 					tokenCode.tCode =  Token.TokenCode.INT;
